@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 R的数据类型和相关计算 | R语言编程与心理统计</title>
+  <meta name="description" content="本书是一本关于如何使用R语言进行心理学数据分析的工具书，适合作为本科生、研究生学习R语言进行统计分析的教材，以及心理学的研究者作为数据分析参考书。" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 R的数据类型和相关计算 | R语言编程与心理统计" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="本书是一本关于如何使用R语言进行心理学数据分析的工具书，适合作为本科生、研究生学习R语言进行统计分析的教材，以及心理学的研究者作为数据分析参考书。" />
+  <meta name="github-repo" content="rstudio/rpaps" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 R的数据类型和相关计算 | R语言编程与心理统计" />
+  
+  <meta name="twitter:description" content="本书是一本关于如何使用R语言进行心理学数据分析的工具书，适合作为本科生、研究生学习R语言进行统计分析的教材，以及心理学的研究者作为数据分析参考书。" />
+  
+
+<meta name="author" content="史更虎" />
+
+
+<meta name="date" content="2022-04-08" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="literature.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> R编程环境的搭建</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#r是啥"><i class="fa fa-check"></i><b>1.1</b> R是啥？</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#r编程环境r语言在哪儿写程序"><i class="fa fa-check"></i><b>1.2</b> R编程环境：R语言在哪儿写程序？</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#第一步先装上r"><i class="fa fa-check"></i><b>1.2.1</b> 第一步：先装上R</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#rgui都可以干啥"><i class="fa fa-check"></i><b>1.2.2</b> RGUI都可以干啥？</a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#更好的选择rstudio"><i class="fa fa-check"></i><b>1.2.3</b> 更好的选择：RStudio</a></li>
+<li class="chapter" data-level="1.2.4" data-path="index.html"><a href="index.html#还有其他的r的开发环境吗"><i class="fa fa-check"></i><b>1.2.4</b> 还有其他的R的开发环境吗？</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="r的数据类型和相关计算.html"><a href="r的数据类型和相关计算.html"><i class="fa fa-check"></i><b>2</b> R的数据类型和相关计算</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="r的数据类型和相关计算.html"><a href="r的数据类型和相关计算.html#基本数据类型"><i class="fa fa-check"></i><b>2.1</b> 基本数据类型</a></li>
+<li class="chapter" data-level="2.2" data-path="r的数据类型和相关计算.html"><a href="r的数据类型和相关计算.html#变量variables"><i class="fa fa-check"></i><b>2.2</b> 变量（Variables）</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="r的数据类型和相关计算.html"><a href="r的数据类型和相关计算.html#变量的赋值"><i class="fa fa-check"></i><b>2.2.1</b> 变量的赋值</a></li>
+<li class="chapter" data-level="2.2.2" data-path="r的数据类型和相关计算.html"><a href="r的数据类型和相关计算.html#变量命名如何给变量取名字"><i class="fa fa-check"></i><b>2.2.2</b> 变量命名：如何给变量取名字</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="r的数据类型和相关计算.html"><a href="r的数据类型和相关计算.html#算术运算"><i class="fa fa-check"></i><b>2.3</b> 算术运算</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="r的数据类型和相关计算.html"><a href="r的数据类型和相关计算.html#变量在算术运算中的使用"><i class="fa fa-check"></i><b>2.3.1</b> 变量在算术运算中的使用</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="r的数据类型和相关计算.html"><a href="r的数据类型和相关计算.html#逻辑表达式和逻辑运算"><i class="fa fa-check"></i><b>2.4</b> 逻辑表达式和逻辑运算</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="r的数据类型和相关计算.html"><a href="r的数据类型和相关计算.html#逻辑表达式的应用"><i class="fa fa-check"></i><b>2.4.1</b> 逻辑表达式的应用</a></li>
+<li class="chapter" data-level="2.4.2" data-path="r的数据类型和相关计算.html"><a href="r的数据类型和相关计算.html#和"><i class="fa fa-check"></i><b>2.4.2</b> &amp;&amp;和||</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="r的数据类型和相关计算.html"><a href="r的数据类型和相关计算.html#向量vector"><i class="fa fa-check"></i><b>2.5</b> 向量（Vector）</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="r的数据类型和相关计算.html"><a href="r的数据类型和相关计算.html#向量是什么"><i class="fa fa-check"></i><b>2.5.1</b> 向量是什么？</a></li>
+<li class="chapter" data-level="2.5.2" data-path="r的数据类型和相关计算.html"><a href="r的数据类型和相关计算.html#r的向量"><i class="fa fa-check"></i><b>2.5.2</b> R的向量</a></li>
+<li class="chapter" data-level="2.5.3" data-path="r的数据类型和相关计算.html"><a href="r的数据类型和相关计算.html#通过下标访问向量中的元素"><i class="fa fa-check"></i><b>2.5.3</b> 通过下标访问向量中的元素</a></li>
+<li class="chapter" data-level="2.5.4" data-path="r的数据类型和相关计算.html"><a href="r的数据类型和相关计算.html#向量的运算"><i class="fa fa-check"></i><b>2.5.4</b> 向量的运算</a></li>
+<li class="chapter" data-level="2.5.5" data-path="r的数据类型和相关计算.html"><a href="r的数据类型和相关计算.html#向量函数function"><i class="fa fa-check"></i><b>2.5.5</b> 向量函数（function）</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="r的数据类型和相关计算.html"><a href="r的数据类型和相关计算.html#数组与矩阵"><i class="fa fa-check"></i><b>2.6</b> 数组与矩阵</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="r的数据类型和相关计算.html"><a href="r的数据类型和相关计算.html#数组array"><i class="fa fa-check"></i><b>2.6.1</b> 数组（array）</a></li>
+<li class="chapter" data-level="2.6.2" data-path="r的数据类型和相关计算.html"><a href="r的数据类型和相关计算.html#矩阵matrix"><i class="fa fa-check"></i><b>2.6.2</b> 矩阵(Matrix)</a></li>
+<li class="chapter" data-level="2.6.3" data-path="r的数据类型和相关计算.html"><a href="r的数据类型和相关计算.html#矩阵运算"><i class="fa fa-check"></i><b>2.6.3</b> 矩阵运算</a></li>
+<li class="chapter" data-level="2.6.4" data-path="r的数据类型和相关计算.html"><a href="r的数据类型和相关计算.html#矩阵函数"><i class="fa fa-check"></i><b>2.6.4</b> 矩阵函数</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>3</b> Literature</a></li>
+<li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="methods.html"><a href="methods.html#math-example"><i class="fa fa-check"></i><b>4.1</b> math example</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>5.1</b> Example one</a></li>
+<li class="chapter" data-level="5.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>5.2</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R语言编程与心理统计</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="r的数据类型和相关计算" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> R的数据类型和相关计算</h1>
+<p>      
+学过统计分析之后，我们知道统计分析最基本的就是数学计算。所以，在介绍R编程之前，我们首先来了解如何使R进行数学计算。R具有强大的计算能力。通过本章，我们可以了解：</p>
+<ul>
+<li>用R进行算术运算</li>
+<li>变量、向量(vector)、矩阵(matrix)和数组(array)、列表(list)、以及日期和时间</li>
+<li>用R进行逻辑运算</li>
+<li>如何使用R自带的函数进行运算</li>
+</ul>
+<div id="基本数据类型" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> 基本数据类型</h2>
+<p>      
+我们知道计算机本来就是用来计算的数值的，就像我们上节做算术运算时用的数值。因此，数值就是R中一种数据类型。另外，计算机还可以处理文字、图像、视频、音频等等数据。</p>
+<p>      
+R中最基本的数据类型有：</p>
+<ul>
+<li><strong>数值:</strong>包括整数、浮点数(也是就带小数点的数)、甚至是虚数。</li>
+<li><strong>字符串：</strong>也就是文字，如中文的字、词、句子、一段文章，英文中的字母、单词、无意义的字母组合、句子、一段文章等等。</li>
+<li><strong>布尔型：</strong>只有两种取值或者状态，TRUE（真）或者FALSE（假）。</li>
+<li><strong>空值：</strong>学过统计，我们知道数据中会有缺失值的情况，这些缺失值就是空值。在R中，空值用NA表示，NA不是North America，而是not available（不可用的）的缩写。</li>
+</ul>
+</div>
+<div id="变量variables" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> 变量（Variables）</h2>
+<p>      
+变量就像一个贴着标签的抽屉。我们可以把东西放进去，可以看它里边有什么东西，可以把里边的东西替换成别的东西，但是标签上的名字不可以变。</p>
+<div id="变量的赋值" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> 变量的赋值</h3>
+<p>      
+在R中，当我们创建或者定义一个变量时，就要给它赋一个初始值。变量的赋值就相当于把东西放进抽屉的过程。在R中，我们用赋值命令“&lt;-”给变量赋值，也可以用等号（“=”）给变量赋值。例如我们将一个数5赋值给变量x：</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="r的数据类型和相关计算.html#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span></code></pre></div>
+<p>      
+如果要看x存储的值是什么，我们可以用print(x)或者show(x)，或者直接在控制台输入x，然后回车。</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="r的数据类型和相关计算.html#cb2-1" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<p>字符串的变量</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="r的数据类型和相关计算.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#这句代码可以使R打印出中文</span></span>
+<span id="cb4-2"><a href="r的数据类型和相关计算.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setlocale</span>(<span class="st">&quot;LC_ALL&quot;</span>,<span class="st">&quot;Chinese&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;LC_COLLATE=Chinese (Simplified)_China.936;LC_CTYPE=Chinese (Simplified)_China.936;LC_MONETARY=Chinese (Simplified)_China.936;LC_NUMERIC=C;LC_TIME=Chinese (Simplified)_China.936&quot;</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="r的数据类型和相关计算.html#cb6-1" aria-hidden="true" tabindex="-1"></a>str <span class="ot">&lt;-</span> <span class="st">&quot;少小不努力，老大徒伤悲。&quot;</span></span>
+<span id="cb6-2"><a href="r的数据类型和相关计算.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(str)</span></code></pre></div>
+<pre><code>## [1] &quot;少小不努力，老大徒伤悲。&quot;</code></pre>
+<p>布尔型变量</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="r的数据类型和相关计算.html#cb8-1" aria-hidden="true" tabindex="-1"></a>bool <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb8-2"><a href="r的数据类型和相关计算.html#cb8-2" aria-hidden="true" tabindex="-1"></a>bool</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>空值变量</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="r的数据类型和相关计算.html#cb10-1" aria-hidden="true" tabindex="-1"></a>na <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb10-2"><a href="r的数据类型和相关计算.html#cb10-2" aria-hidden="true" tabindex="-1"></a>na</span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<p>      
+我们还可以改变x的值，这就相当于将抽屉里的东西换成别的东西。不同的是，我们不需要取出x里的值再放进去，只需要给x重新赋值即可。</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="r的数据类型和相关计算.html#cb12-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb12-2"><a href="r的数据类型和相关计算.html#cb12-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>## [1] 100</code></pre>
+<p>此外，函数的返回值同样可以被赋值给一个变量。后面，我们会不断地接触到这样的操作。</p>
+</div>
+<div id="变量命名如何给变量取名字" class="section level3" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> 变量命名：如何给变量取名字</h3>
+<p>      
+在R中，变量命名有三个原则：</p>
+<ol style="list-style-type: decimal">
+<li><p>取个有意义的名字，而不是只简单地用x，y，z，a，b，c。例如，一个变量要存储学生的姓名，我们可以给它取名为name或者xingming。这样可以增加程序的易读性，也方便我们记住变量存储的值是什么。</p></li>
+<li><p>变量名通常可以使用字母、数字、和点（.）或者下划线（_）。但是，变量名必须以字母或者点（.）加上一个字母开头，如name或者.name。</p></li>
+<li><p>在R中，变量名是区分大小写的，例如，name和Name是不同的。</p></li>
+</ol>
+      
+<center>
+<strong>思考题：为什么我们需要变量，而不直接使用数值来进行运算？</strong>
+</center>
+<p>      
+这是因为在编程时，我们可能会在许多地方用到同样的数值，而且这些数值在不同的条件下，可能会发生变化。因此，如果我们把这个数值赋给一个变量，当数值在不同条件下发生变化时，我们只需要改变变量的赋值就可以了，而不需要在程序中每个地方改变那个数值。在后边的编程中，我们可以慢慢体会变量的好处。</p>
+</div>
+</div>
+<div id="算术运算" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> 算术运算</h2>
+<p>      
+R使用键盘上常用的加（+）减（-）乘（*）除（/）的符号进行算术运算，^用来做幂运算（指数运算）。括号()用来指定运算的顺序，两个百分号（%%）用来做取模运算（求余运算，是在整数运算中求一个整数除以另一个整数的余数的运算），在两个百分号之间加一个除号（%/%）用于做整数除法，即求一个整数除以另一个整数得到结果的整数部分。下面，我们在R的控制台中一一体验一下这些运算。</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="r的数据类型和相关计算.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#加法 +：</span></span>
+<span id="cb14-2"><a href="r的数据类型和相关计算.html#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="r的数据类型和相关计算.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span> <span class="sc">+</span> <span class="dv">5</span></span></code></pre></div>
+<pre><code>## [1] 18</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="r的数据类型和相关计算.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#减法 -：</span></span>
+<span id="cb16-2"><a href="r的数据类型和相关计算.html#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="r的数据类型和相关计算.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span> <span class="sc">-</span> <span class="dv">5</span></span></code></pre></div>
+<pre><code>## [1] 8</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="r的数据类型和相关计算.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#乘法 *：</span></span>
+<span id="cb18-2"><a href="r的数据类型和相关计算.html#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="r的数据类型和相关计算.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span> <span class="sc">*</span> <span class="dv">5</span></span></code></pre></div>
+<pre><code>## [1] 65</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="r的数据类型和相关计算.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#除法 /：</span></span>
+<span id="cb20-2"><a href="r的数据类型和相关计算.html#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="r的数据类型和相关计算.html#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span> <span class="sc">/</span> <span class="dv">5</span></span></code></pre></div>
+<pre><code>## [1] 2.6</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="r的数据类型和相关计算.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 混合运算：</span></span>
+<span id="cb22-2"><a href="r的数据类型和相关计算.html#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="r的数据类型和相关计算.html#cb22-3" aria-hidden="true" tabindex="-1"></a>(<span class="dv">13</span> <span class="sc">+</span> <span class="dv">5</span>)<span class="sc">/</span><span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] 9</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="r的数据类型和相关计算.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#求余运算 %%：</span></span>
+<span id="cb24-2"><a href="r的数据类型和相关计算.html#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="r的数据类型和相关计算.html#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span> <span class="sc">%%</span> <span class="dv">5</span></span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="r的数据类型和相关计算.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#整数除法运算 %/%：</span></span>
+<span id="cb26-2"><a href="r的数据类型和相关计算.html#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="r的数据类型和相关计算.html#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span> <span class="sc">%/%</span> <span class="dv">5</span></span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="r的数据类型和相关计算.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#幂运算 ^：</span></span>
+<span id="cb28-2"><a href="r的数据类型和相关计算.html#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="r的数据类型和相关计算.html#cb28-3" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">100</span>)<span class="sc">^</span><span class="dv">100</span></span></code></pre></div>
+<pre><code>## [1] 2.704814</code></pre>
+<div id="变量在算术运算中的使用" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> 变量在算术运算中的使用</h3>
+<p>      
+变量创建完之后，我们就可以使用它们。变量被赋了什么值，这个变量在使用时就代表这个值。例如：</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="r的数据类型和相关计算.html#cb30-1" aria-hidden="true" tabindex="-1"></a>num <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb30-2"><a href="r的数据类型和相关计算.html#cb30-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span><span class="sc">+</span><span class="dv">1</span><span class="sc">/</span>num)<span class="sc">^</span>num</span></code></pre></div>
+<pre><code>## [1] 2.704814</code></pre>
+<p>      
+我们还可以在计算中使用变量之后，再将计算的结果赋值给该变量。例如：</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="r的数据类型和相关计算.html#cb32-1" aria-hidden="true" tabindex="-1"></a>num <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb32-2"><a href="r的数据类型和相关计算.html#cb32-2" aria-hidden="true" tabindex="-1"></a>num <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">+</span><span class="dv">1</span><span class="sc">/</span>num)<span class="sc">^</span>num</span>
+<span id="cb32-3"><a href="r的数据类型和相关计算.html#cb32-3" aria-hidden="true" tabindex="-1"></a>num</span></code></pre></div>
+<pre><code>## [1] 2.704814</code></pre>
+<p>或者</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="r的数据类型和相关计算.html#cb34-1" aria-hidden="true" tabindex="-1"></a>num <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb34-2"><a href="r的数据类型和相关计算.html#cb34-2" aria-hidden="true" tabindex="-1"></a>num <span class="ot">&lt;-</span> num <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb34-3"><a href="r的数据类型和相关计算.html#cb34-3" aria-hidden="true" tabindex="-1"></a>num</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+</div>
+</div>
+<div id="逻辑表达式和逻辑运算" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> 逻辑表达式和逻辑运算</h2>
+<p>逻辑表达式是使用比较运算符，大于（&gt;）、小于（&lt;）、大于等于（&gt;=）、小于等于（&lt;=）、等于（==）、不等于（!=），和逻辑运算符，&amp;（与）、|（或）、非（!）、异或（xor），连接起来，并用括号()来控制运算顺序的表达式。</p>
+<p>逻辑表达式的值是TRUE或者FALSE。数字1和0也可以分别用来表示TRUE和FALSE。</p>
+<p>比较运算符容易理解。</p>
+<p><strong>比较运算符的例子</strong></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="r的数据类型和相关计算.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">&lt;=</span> <span class="dv">4</span></span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="r的数据类型和相关计算.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">4</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="r的数据类型和相关计算.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="sc">%%</span> <span class="dv">3</span> <span class="sc">!=</span> <span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>我们着重解释一下逻辑运算符。</p>
+<ul>
+<li>如果A或B（A|B）是TRUE，那么A和B中至少要有一个为TRUE。如果A|B是FALSE，那么A和B全部为FALSE。</li>
+<li>如果A与B（A&amp;B）是TRUE，那么A和B必须全为TRUE。如果A&amp;B是FALSE，那么A和B至少有一个为FALSE。</li>
+<li>如果A为TRUE，!A为FALSE，反之亦然。</li>
+<li>xor(A, B)表示，如果A和B一个为TRUE，一个为FALSE，那么xor(A, B)为TRUE。如果A和B相同，那么xor(A, B)为FALSE。</li>
+</ul>
+<p><strong>逻辑运算的例子</strong></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="r的数据类型和相关计算.html#cb42-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb42-2"><a href="r的数据类型和相关计算.html#cb42-2" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb42-3"><a href="r的数据类型和相关计算.html#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co">#与</span></span>
+<span id="cb42-4"><a href="r的数据类型和相关计算.html#cb42-4" aria-hidden="true" tabindex="-1"></a>A<span class="sc">&amp;</span>B</span></code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE  TRUE</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="r的数据类型和相关计算.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">#或</span></span>
+<span id="cb44-2"><a href="r的数据类型和相关计算.html#cb44-2" aria-hidden="true" tabindex="-1"></a>A<span class="sc">|</span>B</span></code></pre></div>
+<pre><code>## [1] FALSE  TRUE  TRUE  TRUE</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="r的数据类型和相关计算.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">#非</span></span>
+<span id="cb46-2"><a href="r的数据类型和相关计算.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>A</span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE FALSE FALSE</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="r的数据类型和相关计算.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#异或</span></span>
+<span id="cb48-2"><a href="r的数据类型和相关计算.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">xor</span>(A, B)</span></code></pre></div>
+<pre><code>## [1] FALSE  TRUE  TRUE FALSE</code></pre>
+<div id="逻辑表达式的应用" class="section level3" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> 逻辑表达式的应用</h3>
+<p><strong>1. 从向量中提取子向量</strong></p>
+<p>前边我们提到过可以通过逻辑向量访问向量<span class="math inline">\(vec\)</span>中的多个元素。被访问的元素可以作为一个子向量保存到一个变量中。这个逻辑向量的长度要和<span class="math inline">\(vec\)</span>的长度相同。向量<span class="math inline">\(vec\)</span>中对应逻辑向量中为TRUE的元素，被提取出来形成一个子向量。</p>
+<p>这里，我们可以利用逻辑表达式来提取向量的子集。</p>
+<p>例如，我们想要找到1到20的整数中能被3整除的数。</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="r的数据类型和相关计算.html#cb50-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span></span>
+<span id="cb50-2"><a href="r的数据类型和相关计算.html#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="r的数据类型和相关计算.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="co">#x中的每一个数除以3余数为0，即被3整除</span></span>
+<span id="cb50-4"><a href="r的数据类型和相关计算.html#cb50-4" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%%</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">0</span></span></code></pre></div>
+<pre><code>##  [1] FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE  TRUE
+## [13] FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="r的数据类型和相关计算.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">#用上一步生成的逻辑向量来找到1到20之间能被3整除的数</span></span>
+<span id="cb52-2"><a href="r的数据类型和相关计算.html#cb52-2" aria-hidden="true" tabindex="-1"></a>(y <span class="ot">&lt;-</span> x[x <span class="sc">%%</span> <span class="dv">3</span> <span class="sc">==</span> <span class="dv">0</span>])</span></code></pre></div>
+<pre><code>## [1]  3  6  9 12 15 18</code></pre>
+<p>R也提供了一个函数subset()用来提取向量的子向量。它与通过逻辑下标来提取子向量的区别就在于处理缺失值（NA）的方法不同。函数subset()会忽略缺失值（NA），但是通过逻辑下标的提取子向量的方法会保留缺失值（NA）。</p>
+<p>例如，我们要找到向量x中大于2的所有元素。</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="r的数据类型和相关计算.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 通过逻辑下标提取子向量</span></span>
+<span id="cb54-2"><a href="r的数据类型和相关计算.html#cb54-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="cn">NA</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb54-3"><a href="r的数据类型和相关计算.html#cb54-3" aria-hidden="true" tabindex="-1"></a>x<span class="sc">&gt;</span><span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] FALSE    NA  TRUE  TRUE</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="r的数据类型和相关计算.html#cb56-1" aria-hidden="true" tabindex="-1"></a>x[x <span class="sc">&gt;</span> <span class="dv">2</span>]</span></code></pre></div>
+<pre><code>## [1] NA  3  4</code></pre>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="r的数据类型和相关计算.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co">#通过函数subset提取子向量</span></span>
+<span id="cb58-2"><a href="r的数据类型和相关计算.html#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(x, <span class="at">subset =</span> x<span class="sc">&gt;</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 3 4</code></pre>
+<p><strong>2. 找到元素在向量x中的索引位置</strong></p>
+<p>如果我们想要找到逻辑向量中为TRUE的元素在向量x中的索引位置或下标，可以用which()。</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="r的数据类型和相关计算.html#cb60-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">8</span>,<span class="dv">10</span>)</span>
+<span id="cb60-2"><a href="r的数据类型和相关计算.html#cb60-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-3"><a href="r的数据类型和相关计算.html#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(x<span class="sc">%%</span><span class="dv">3</span> <span class="sc">==</span> <span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## [1] 1 3</code></pre>
+<p><strong>应用逻辑表达式时，注意四舍五入的问题（rounding error）</strong></p>
+<p>电子计算机中的浮点数有可能会受舍入的错误的影响。</p>
+<p>例如，<span class="math inline">\(\sqrt(2) \times \sqrt(2) == 2\)</span>就不成立，虽然在R中<span class="math inline">\(\sqrt(2) \times \sqrt(2)\)</span>的结果也是2。</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="r的数据类型和相关计算.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">2</span>) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">2</span>) <span class="sc">==</span> <span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="r的数据类型和相关计算.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">2</span>) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p>解决这个问题，可以用函数all.equal(x, y)。</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="r的数据类型和相关计算.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all.equal</span>(<span class="fu">sqrt</span>(<span class="dv">2</span>) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">2</span>), <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>我们可以看到，以上代码返回的是TRUE。</p>
+</div>
+<div id="和" class="section level3" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> &amp;&amp;和||</h3>
+<p>逻辑运算符<span class="math inline">\(\&amp;\&amp;\)</span>和<span class="math inline">\(||\)</span>分别是顺序求值版的<span class="math inline">\(\&amp;\)</span>(与)和<span class="math inline">\(|\)</span>(或)。</p>
+<p>假设<span class="math inline">\(x\)</span>和<span class="math inline">\(y\)</span>是两个逻辑表达式。求<span class="math inline">\(x\&amp;y\)</span>的值之前，R要先求<span class="math inline">\(x\)</span>和<span class="math inline">\(y\)</span>的值，再求<span class="math inline">\(x\&amp;y\)</span>。然而，求<span class="math inline">\(x\&amp;\&amp;y\)</span>的值时，R先求<span class="math inline">\(x\)</span>的值，如果<span class="math inline">\(x\)</span>是FALSE，R就直接返回FALSE，不再需要求<span class="math inline">\(y\)</span>的值了；如果<span class="math inline">\(x\)</span>是TRUE，R要再求<span class="math inline">\(y\)</span>的值，然后再判断<span class="math inline">\(x\&amp;\&amp;y\)</span>是TRUE还是FALSE。</p>
+<p>同样地，求<span class="math inline">\(x||y\)</span>的值时，R只在<span class="math inline">\(x\)</span>是FALSE的情况下才需要求<span class="math inline">\(y\)</span>的值。</p>
+<p>当<span class="math inline">\(y\)</span>没有被很好地定义时，顺序求<span class="math inline">\(x\)</span>和<span class="math inline">\(y\)</span>的值非常有用。</p>
+<p>例如，我们想要知道<span class="math inline">\(xsin(1/x)\)</span>是否等于<span class="math inline">\(0\)</span>。</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="r的数据类型和相关计算.html#cb68-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb68-2"><a href="r的数据类型和相关计算.html#cb68-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-3"><a href="r的数据类型和相关计算.html#cb68-3" aria-hidden="true" tabindex="-1"></a>x <span class="sc">*</span> <span class="fu">sin</span>(<span class="dv">1</span><span class="sc">/</span>x) <span class="sc">==</span> <span class="dv">0</span></span></code></pre></div>
+<pre><code>## Warning in sin(1/x): NaNs produced</code></pre>
+<pre><code>## [1] NA</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="r的数据类型和相关计算.html#cb71-1" aria-hidden="true" tabindex="-1"></a>(x <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">|</span> (<span class="fu">sin</span>(<span class="dv">1</span><span class="sc">/</span>x) <span class="sc">==</span> <span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## Warning in sin(1/x): NaNs produced</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="r的数据类型和相关计算.html#cb74-1" aria-hidden="true" tabindex="-1"></a>(x <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">|</span> (<span class="fu">sin</span>(<span class="dv">1</span><span class="sc">/</span>x) <span class="sc">==</span> <span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## Warning in sin(1/x): NaNs produced</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>注意，<span class="math inline">\(\&amp;\&amp;\)</span>和<span class="math inline">\(||\)</span>只可以用于标量（只有大小，没有方向的量，实际上就是实数），而<span class="math inline">\(\&amp;\)</span>和<span class="math inline">\(|\)</span>可以逐一用到向量里的每一个元素上。</p>
+</div>
+</div>
+<div id="向量vector" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> 向量（Vector）</h2>
+<div id="向量是什么" class="section level3" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> 向量是什么？</h3>
+<p>在数学中，向量又被叫做几何向量或者欧几里得向量，是指欧几里得几何空间中有大小和方向的线段。</p>
+<p>有人会问，向量不是数学中几何空间的概念吗？为什么我在R里要学这个？我们看看向量到底是什么。</p>
+<p>在数学中，向量从零点指向空间中另一个点的一个箭头。</p>
+<center>
+<img src="images/vector.png" title="fig:" alt="Vector" />
+</center>
+<center>
+图2.1 几何空间中的向量
+</center>
+<p>
+<p>
+<p>在上图中，三维空间中的红色向量可以用X轴、Y轴和Z轴上的投影的长度表示，即：<span class="math inline">\((5, 8, 3)\)</span>。</p>
+<p>如果在N维空间中呢？ N个数字表示，对不对？</p>
+<p><span class="math inline">\((n_1, n_2, ..., n_N)\)</span></p>
+<p>向量有行向量和列向量之分，但是在R中，向量一般指的是<span style="color: red;"><strong>列向量</strong></span>，即是一列数值。</p>
+<strong>用空间几何向量的概念解释相关系数</strong>
+<center>
+<img src="images/cos.jpg" title="fig:" alt="Cosine" />
+</center>
+<center>
+图2.2 两个向量的相关关系
+</center>
+<p>
+<p>两个向量（两列数据）的相关系数其实就是这两个向量的夹角的余弦值（这里不做证明了）。</p>
+<p><span class="math inline">\(cor(\alpha,\ \beta)\ =\ cosine(\alpha,\ \beta)\)</span></p>
+</div>
+<div id="r的向量" class="section level3" number="2.5.2">
+<h3><span class="header-section-number">2.5.2</span> R的向量</h3>
+<p>在R中，向量是：</p>
+<ol style="list-style-type: decimal">
+<li>一个带索引的变量（我们可以通过向量中的元素的顺序，也叫<strong>下标</strong>，作为它的索引来访问向量中的元素），</li>
+<li>可以容纳一个及多个数值、布尔型数据、空值或字符串（它们被称为元素），</li>
+<li>只允许相同类型的元素存在其中。</li>
+</ol>
+<blockquote>
+<p><strong>注意，c这里是小写。</strong></p>
+</blockquote>
+<p>首先，我们创建一个全是数字的向量<span class="math inline">\(vec\)</span>。</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="r的数据类型和相关计算.html#cb77-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>)</span>
+<span id="cb77-2"><a href="r的数据类型和相关计算.html#cb77-2" aria-hidden="true" tabindex="-1"></a>vec</span></code></pre></div>
+<pre><code>## [1] 4 7 6 5 6 7</code></pre>
+<p>接着，我们创建一个全是字符的向量<span class="math inline">\(str\_vec\)</span>。</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="r的数据类型和相关计算.html#cb79-1" aria-hidden="true" tabindex="-1"></a>str_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;hello&#39;</span>, <span class="st">&#39;world&#39;</span>)</span>
+<span id="cb79-2"><a href="r的数据类型和相关计算.html#cb79-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-3"><a href="r的数据类型和相关计算.html#cb79-3" aria-hidden="true" tabindex="-1"></a>str_vec</span></code></pre></div>
+<pre><code>## [1] &quot;hello&quot; &quot;world&quot;</code></pre>
+<p>当我们创建一个既有字符串又有数字的向量时，R会把数字自动升级为字符串。</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="r的数据类型和相关计算.html#cb81-1" aria-hidden="true" tabindex="-1"></a>mixed <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;hello&#39;</span>, <span class="dv">5</span>)</span>
+<span id="cb81-2"><a href="r的数据类型和相关计算.html#cb81-2" aria-hidden="true" tabindex="-1"></a>mixed</span></code></pre></div>
+<pre><code>## [1] &quot;hello&quot; &quot;5&quot;</code></pre>
+<p>最后，我们创建一个布尔型的向量。同时该向量中含有空值。</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="r的数据类型和相关计算.html#cb83-1" aria-hidden="true" tabindex="-1"></a>bool_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">NA</span>, <span class="cn">FALSE</span>, <span class="cn">NA</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb83-2"><a href="r的数据类型和相关计算.html#cb83-2" aria-hidden="true" tabindex="-1"></a>bool_vec</span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE    NA FALSE    NA  TRUE FALSE</code></pre>
+</div>
+<div id="通过下标访问向量中的元素" class="section level3" number="2.5.3">
+<h3><span class="header-section-number">2.5.3</span> 通过下标访问向量中的元素</h3>
+<p>前面提到，我们可以通过向量的索引，或者下标，来访问向量中的元素。这个索引是元素在向量中的顺序，它是从1开始的（注意，大部分的编程语言都是从0开始的）。</p>
+<p>访问向量中的元素</p>
+<ul>
+<li>访问单个元素： 向量的名字加上<span class="math inline">\([ ]\)</span>和下标（元素的顺序，从1开始）来获得或者访问相应的元素，例如<span class="math inline">\(vec[4]\)</span>。</li>
+</ul>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="r的数据类型和相关计算.html#cb85-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>)</span>
+<span id="cb85-2"><a href="r的数据类型和相关计算.html#cb85-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-3"><a href="r的数据类型和相关计算.html#cb85-3" aria-hidden="true" tabindex="-1"></a>vec[<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="r的数据类型和相关计算.html#cb87-1" aria-hidden="true" tabindex="-1"></a>vec[<span class="dv">5</span>]</span></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="r的数据类型和相关计算.html#cb89-1" aria-hidden="true" tabindex="-1"></a>vec[<span class="dv">1</span>] <span class="sc">+</span> vec[<span class="dv">5</span>]</span></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<ul>
+<li>访问多个元素：
+<ul>
+<li><p>如果我们想访问多个元素的话，可以将我们想要访问的元素的下标放到另外一个向量里，再将这个向量放到<span class="math inline">\([]\)</span>里, 例如<span class="math inline">\(vec[c(2, 3, 6)]\)</span>。</p></li>
+<li><p>可以去掉向量中的某些元素，用减号-加上下标向量，例如， <span class="math inline">\(vec[-c(1,4,5)]\)</span>。</p></li>
+<li><p>通过逻辑下标访问向量中的元素。首先创建一个和向量长度相同的逻辑向量，如<span class="math inline">\(c(FALSE, TRUE, TRUE, FALSE, FALSE, TRUE)\)</span>，逻辑向量中的TRUE或者FALSE和要访问的向量中的元素一一对应，TRUE表示我们要访问的元素，FALSE表示我们不要访问的元素，例如，<span class="math inline">\(vec[c(FALSE, TRUE, TRUE, FALSE, FALSE, TRUE)]\)</span>。</p></li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="r的数据类型和相关计算.html#cb91-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>)</span>
+<span id="cb91-2"><a href="r的数据类型和相关计算.html#cb91-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-3"><a href="r的数据类型和相关计算.html#cb91-3" aria-hidden="true" tabindex="-1"></a>multi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">6</span>)</span>
+<span id="cb91-4"><a href="r的数据类型和相关计算.html#cb91-4" aria-hidden="true" tabindex="-1"></a><span class="co">#通过下标向量访问向量中的多个元素</span></span>
+<span id="cb91-5"><a href="r的数据类型和相关计算.html#cb91-5" aria-hidden="true" tabindex="-1"></a>vec[multi]</span></code></pre></div>
+<pre><code>## [1] 7 6 7</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="r的数据类型和相关计算.html#cb93-1" aria-hidden="true" tabindex="-1"></a>vec[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">6</span>)]</span></code></pre></div>
+<pre><code>## [1] 7 6 7</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="r的数据类型和相关计算.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co">#去掉向量vec中的第2、3、6个元素</span></span>
+<span id="cb95-2"><a href="r的数据类型和相关计算.html#cb95-2" aria-hidden="true" tabindex="-1"></a>vec[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">5</span>)]</span></code></pre></div>
+<pre><code>## [1] 7 6 7</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="r的数据类型和相关计算.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co">#通过逻辑下标访问向量中的元素</span></span>
+<span id="cb97-2"><a href="r的数据类型和相关计算.html#cb97-2" aria-hidden="true" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb97-3"><a href="r的数据类型和相关计算.html#cb97-3" aria-hidden="true" tabindex="-1"></a>vec[l]</span></code></pre></div>
+<pre><code>## [1] 7 6 7</code></pre>
+<p>如果我们知道一个数值，如何获得它在向量中的下标呢？</p>
+<p><strong>答案是通过which()函数。</strong></p>
+<p>假如，我们想知道6在向量vec中的下标：</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="r的数据类型和相关计算.html#cb99-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>)</span>
+<span id="cb99-2"><a href="r的数据类型和相关计算.html#cb99-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-3"><a href="r的数据类型和相关计算.html#cb99-3" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(vec <span class="sc">==</span> <span class="dv">6</span>)</span></code></pre></div>
+<pre><code>## [1] 3 5</code></pre>
+<p>从上面输出的结果，我们看到，6在向量vec中出现了两次，第一次下标是3，第二次下标是5。</p>
+<p>若我们想知道向量vec中的最大值和最小值的下标，我们可以先求出向量的最大值和最小值，再用which()函数找出它们的位置。</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="r的数据类型和相关计算.html#cb101-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>)</span>
+<span id="cb101-2"><a href="r的数据类型和相关计算.html#cb101-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-3"><a href="r的数据类型和相关计算.html#cb101-3" aria-hidden="true" tabindex="-1"></a><span class="co">#min(vec)可得到向量的最小元素</span></span>
+<span id="cb101-4"><a href="r的数据类型和相关计算.html#cb101-4" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(vec <span class="sc">==</span> <span class="fu">min</span>(vec))</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="r的数据类型和相关计算.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co">#max(vec)可得到向量的最大元素</span></span>
+<span id="cb103-2"><a href="r的数据类型和相关计算.html#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(vec <span class="sc">==</span> <span class="fu">max</span>(vec))</span></code></pre></div>
+<pre><code>## [1] 2 6</code></pre>
+</div>
+<div id="向量的运算" class="section level3" number="2.5.4">
+<h3><span class="header-section-number">2.5.4</span> 向量的运算</h3>
+<p>向量的算术运算会分别作用于向量中的每一个元素上。</p>
+<p>例如,</p>
+<p>两个向量的乘法:</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="r的数据类型和相关计算.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co">#两个向量中对应的元素一一相乘</span></span>
+<span id="cb105-2"><a href="r的数据类型和相关计算.html#cb105-2" aria-hidden="true" tabindex="-1"></a>vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb105-3"><a href="r的数据类型和相关计算.html#cb105-3" aria-hidden="true" tabindex="-1"></a>vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb105-4"><a href="r的数据类型和相关计算.html#cb105-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-5"><a href="r的数据类型和相关计算.html#cb105-5" aria-hidden="true" tabindex="-1"></a>vec1 <span class="sc">*</span> vec2</span></code></pre></div>
+<pre><code>## [1]  4 10 18</code></pre>
+<p>两个向量的加法：</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="r的数据类型和相关计算.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co">#两个向量中对应的元素一一相加</span></span>
+<span id="cb107-2"><a href="r的数据类型和相关计算.html#cb107-2" aria-hidden="true" tabindex="-1"></a>vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb107-3"><a href="r的数据类型和相关计算.html#cb107-3" aria-hidden="true" tabindex="-1"></a>vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb107-4"><a href="r的数据类型和相关计算.html#cb107-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-5"><a href="r的数据类型和相关计算.html#cb107-5" aria-hidden="true" tabindex="-1"></a>vec1 <span class="sc">+</span> vec2</span></code></pre></div>
+<pre><code>## [1] 5 7 9</code></pre>
+<p>两个向量的幂运算：</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="r的数据类型和相关计算.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co">#两个向量中对应的元素一一进行幂运算</span></span>
+<span id="cb109-2"><a href="r的数据类型和相关计算.html#cb109-2" aria-hidden="true" tabindex="-1"></a>vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb109-3"><a href="r的数据类型和相关计算.html#cb109-3" aria-hidden="true" tabindex="-1"></a>vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb109-4"><a href="r的数据类型和相关计算.html#cb109-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-5"><a href="r的数据类型和相关计算.html#cb109-5" aria-hidden="true" tabindex="-1"></a>vec2 <span class="sc">^</span> vec1</span></code></pre></div>
+<pre><code>## [1]   4  25 216</code></pre>
+<p>两个长度（元素个数）不同的向量进行算术运算时，R会自动重复短的那个向量，直到它的长度和长向量的长度一样。</p>
+<p>例如，</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="r的数据类型和相关计算.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="co">#两个向量中对应的元素一一相乘</span></span>
+<span id="cb111-2"><a href="r的数据类型和相关计算.html#cb111-2" aria-hidden="true" tabindex="-1"></a>vec1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb111-3"><a href="r的数据类型和相关计算.html#cb111-3" aria-hidden="true" tabindex="-1"></a>vec2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb111-4"><a href="r的数据类型和相关计算.html#cb111-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-5"><a href="r的数据类型和相关计算.html#cb111-5" aria-hidden="true" tabindex="-1"></a>vec1 <span class="sc">+</span> vec2</span></code></pre></div>
+<pre><code>## [1] 2 4 4 6</code></pre>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="r的数据类型和相关计算.html#cb113-1" aria-hidden="true" tabindex="-1"></a>vec1 <span class="sc">*</span> vec2</span></code></pre></div>
+<pre><code>## [1] 1 4 3 8</code></pre>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="r的数据类型和相关计算.html#cb115-1" aria-hidden="true" tabindex="-1"></a>vec1 <span class="sc">^</span> vec2</span></code></pre></div>
+<pre><code>## [1]  1  4  3 16</code></pre>
+<p>当一个数(也就是一个标量)和向量进行算术运算时，</p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="r的数据类型和相关计算.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 3 4 5</code></pre>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="r的数据类型和相关计算.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 2 4 6</code></pre>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="r的数据类型和相关计算.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] 1 4 9</code></pre>
+</div>
+<div id="向量函数function" class="section level3" number="2.5.5">
+<h3><span class="header-section-number">2.5.5</span> 向量函数（function）</h3>
+<p>在数学中，函数是一个或者多个因变量随着一个或者多个自变量变化的一种关系。在R编程中，函数也是以类似的方式运作。函数是编程的精髓，它使得我们写出的计算机程序可以重复使用。这里，我们只是使用函数，不必深究其工作原理，后面会具体了解函数，并且要自己会写函数。</p>
+<p>R中有许多内在的函数，如前面创建变量所用到的c()函数。我们调用或者使用函数时，只需要打出函数的名字，后边跟着括号，括号中是函数所接受的参数值。参数与参数之间需要用逗号隔开。函数执行之后会返回执行的结果。</p>
+<p><span style="color: red;"><strong>注意：</strong></span><strong>R编程中所用到的逗号和括号切换成英文状态下的逗号和括号。如果使用中文的符号，R会报错。</strong></p>
+<p>下面，我们举例说明如何用其他函数来创建以及操纵向量。</p>
+<p><strong>其他创建向量的方法</strong></p>
+<p>如果我们要创建一个整数或者浮点数序列，可以用操作符“:”或者函数seq()，它们返回的结果也是一个向量。</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="r的数据类型和相关计算.html#cb123-1" aria-hidden="true" tabindex="-1"></a>seq1 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb123-2"><a href="r的数据类型和相关计算.html#cb123-2" aria-hidden="true" tabindex="-1"></a>seq1</span></code></pre></div>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="r的数据类型和相关计算.html#cb125-1" aria-hidden="true" tabindex="-1"></a>seq2 <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from=</span><span class="dv">1</span>, <span class="at">to=</span><span class="dv">10</span>, <span class="at">by=</span><span class="dv">2</span>)</span>
+<span id="cb125-2"><a href="r的数据类型和相关计算.html#cb125-2" aria-hidden="true" tabindex="-1"></a>seq2</span></code></pre></div>
+<pre><code>## [1] 1 3 5 7 9</code></pre>
+<p>上面的例子中，用冒号“:”创建1到10的序列时，相邻两个数字之间的间隔只能是1。</p>
+<p>而在使用seq()创建一个序列时，参数from和to指定序列的区间，参数by指定相邻两个数之间的间隔。</p>
+<p>再看一个例子：</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="r的数据类型和相关计算.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.2</span>)</span></code></pre></div>
+<pre><code>## [1] 0.0 0.2 0.4 0.6 0.8 1.0</code></pre>
+<blockquote>
+<p>注意，如果调用函数时，不加参数的名字（如，from，to，和by），函数中的参数顺序应该和其定义时的顺序一样。如果使用参数的名字，如from=1，则参数的顺序可以改变。</p>
+</blockquote>
+<p>当调用seq()时，参数by为负数时，可以创建从大到小的序列。例如，</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="r的数据类型和相关计算.html#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">by =</span> <span class="sc">-</span><span class="dv">2</span>, <span class="at">from=</span><span class="dv">10</span>, <span class="at">to=</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 10  8  6  4  2</code></pre>
+<p>如果我们想要创建一个全是相同元素的向量，可以用rep()函数。</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="r的数据类型和相关计算.html#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="co">#创建一个包含5个TRUE的向量</span></span>
+<span id="cb131-2"><a href="r的数据类型和相关计算.html#cb131-2" aria-hidden="true" tabindex="-1"></a>rep_true <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">TRUE</span>, <span class="dv">5</span>)</span>
+<span id="cb131-3"><a href="r的数据类型和相关计算.html#cb131-3" aria-hidden="true" tabindex="-1"></a>rep_true</span></code></pre></div>
+<pre><code>## [1] TRUE TRUE TRUE TRUE TRUE</code></pre>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="r的数据类型和相关计算.html#cb133-1" aria-hidden="true" tabindex="-1"></a>rep_num <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">5</span>)</span>
+<span id="cb133-2"><a href="r的数据类型和相关计算.html#cb133-2" aria-hidden="true" tabindex="-1"></a>rep_num</span></code></pre></div>
+<pre><code>## [1] 1 1 1 1 1</code></pre>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="r的数据类型和相关计算.html#cb135-1" aria-hidden="true" tabindex="-1"></a>rep_str<span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;hello&quot;</span>, <span class="dv">5</span>)</span>
+<span id="cb135-2"><a href="r的数据类型和相关计算.html#cb135-2" aria-hidden="true" tabindex="-1"></a>rep_str</span></code></pre></div>
+<pre><code>## [1] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;</code></pre>
+<p><strong>获得向量中元素个数</strong></p>
+<p>如果一个变量有许多元素，一个一个地数，不现实。我们可以用函数length()获得向量中的元素个数。</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="r的数据类型和相关计算.html#cb137-1" aria-hidden="true" tabindex="-1"></a>longvec <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">147</span>, <span class="dv">3</span>)</span>
+<span id="cb137-2"><a href="r的数据类型和相关计算.html#cb137-2" aria-hidden="true" tabindex="-1"></a>longvec</span></code></pre></div>
+<pre><code>##  [1]   1   4   7  10  13  16  19  22  25  28  31  34  37  40  43  46  49  52  55
+## [20]  58  61  64  67  70  73  76  79  82  85  88  91  94  97 100 103 106 109 112
+## [39] 115 118 121 124 127 130 133 136 139 142 145</code></pre>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="r的数据类型和相关计算.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(longvec)</span></code></pre></div>
+<pre><code>## [1] 49</code></pre>
+<p><strong>获得向量中数据的类型</strong></p>
+<p>如果我们想知道一个向量中包含的值的类型是什么，用class()函数。</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="r的数据类型和相关计算.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(longvec)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="r的数据类型和相关计算.html#cb143-1" aria-hidden="true" tabindex="-1"></a>mixed <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;hello&quot;</span>, <span class="dv">5</span>)</span>
+<span id="cb143-2"><a href="r的数据类型和相关计算.html#cb143-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mixed)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>从以上的结果，我们可以看出，当把字符串和数值放到同一个向量时，数值被升格为字符串。</p>
+<p><strong>使用向量元素进行计算</strong></p>
+<p>我们还可以用函数sum()计算向量中所有元素的和，用mean()求其平均数、用median()求其中位数等。这些函数都会返回/输出一个数值，我们可以把这个数值赋值给变量。</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="r的数据类型和相关计算.html#cb145-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb145-2"><a href="r的数据类型和相关计算.html#cb145-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb145-3"><a href="r的数据类型和相关计算.html#cb145-3" aria-hidden="true" tabindex="-1"></a><span class="co">#求vec中所有元素的和</span></span>
+<span id="cb145-4"><a href="r的数据类型和相关计算.html#cb145-4" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">sum</span>(vec)</span>
+<span id="cb145-5"><a href="r的数据类型和相关计算.html#cb145-5" aria-hidden="true" tabindex="-1"></a>s</span></code></pre></div>
+<pre><code>## [1] 55</code></pre>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="r的数据类型和相关计算.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="co">#求vec的平均数</span></span>
+<span id="cb147-2"><a href="r的数据类型和相关计算.html#cb147-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mean</span>(vec)</span>
+<span id="cb147-3"><a href="r的数据类型和相关计算.html#cb147-3" aria-hidden="true" tabindex="-1"></a>m</span></code></pre></div>
+<pre><code>## [1] 5.5</code></pre>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="r的数据类型和相关计算.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="co">#求vec的中位数</span></span>
+<span id="cb149-2"><a href="r的数据类型和相关计算.html#cb149-2" aria-hidden="true" tabindex="-1"></a>md <span class="ot">&lt;-</span> <span class="fu">median</span>(vec)</span>
+<span id="cb149-3"><a href="r的数据类型和相关计算.html#cb149-3" aria-hidden="true" tabindex="-1"></a>md</span></code></pre></div>
+<pre><code>## [1] 5.5</code></pre>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="r的数据类型和相关计算.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="co">#求vec的最小值</span></span>
+<span id="cb151-2"><a href="r的数据类型和相关计算.html#cb151-2" aria-hidden="true" tabindex="-1"></a>min <span class="ot">&lt;-</span> <span class="fu">min</span>(vec)</span>
+<span id="cb151-3"><a href="r的数据类型和相关计算.html#cb151-3" aria-hidden="true" tabindex="-1"></a>min</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="r的数据类型和相关计算.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="co">#求vec的最大值</span></span>
+<span id="cb153-2"><a href="r的数据类型和相关计算.html#cb153-2" aria-hidden="true" tabindex="-1"></a>max <span class="ot">&lt;-</span> <span class="fu">max</span>(vec)</span>
+<span id="cb153-3"><a href="r的数据类型和相关计算.html#cb153-3" aria-hidden="true" tabindex="-1"></a>max</span></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<p><strong>去掉向量中重复的元素</strong></p>
+<p>有的向量中有重复的元素，函数unique()和duplicated()可以帮我们去年重复的元素。</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="r的数据类型和相关计算.html#cb155-1" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Xiaoming&quot;</span>,<span class="st">&quot;Ermao&quot;</span>,<span class="st">&quot;Ermao&quot;</span>,<span class="st">&quot;Xiaoming&quot;</span>,<span class="st">&quot;Ermao&quot;</span>,<span class="st">&quot;Zhuzi&quot;</span>)</span>
+<span id="cb155-2"><a href="r的数据类型和相关计算.html#cb155-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(names)</span></code></pre></div>
+<pre><code>## names
+##    Ermao Xiaoming    Zhuzi 
+##        3        2        1</code></pre>
+<p>从上面的结果，我们可以看到在这个names向量中“Ermao”出现了3次，“Xiaoming“出现了2次，“Zhuzi”出现了1次。</p>
+<p>下面，我们用unique()函数去掉向量names重复的元素。</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="r的数据类型和相关计算.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(names)</span></code></pre></div>
+<pre><code>## [1] &quot;Xiaoming&quot; &quot;Ermao&quot;    &quot;Zhuzi&quot;</code></pre>
+<p>函数duplicated(x)返回一个逻辑向量，告诉我们向量x中哪个元素是重复的。这样，我们就可以采用逻辑下标访问向量x中不重复的元素，去年重复的，或者相反。具体操作如下：</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="r的数据类型和相关计算.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">duplicated</span>(names)</span></code></pre></div>
+<pre><code>## [1] FALSE FALSE  TRUE  TRUE  TRUE FALSE</code></pre>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="r的数据类型和相关计算.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="co">#下边的感叹号（！）是否定的意思。逻辑向量前边加上它，向量中的TRUE就变成FALSE，FALSE就变成TRUE。</span></span>
+<span id="cb161-2"><a href="r的数据类型和相关计算.html#cb161-2" aria-hidden="true" tabindex="-1"></a>no_dup <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">duplicated</span>(names)</span>
+<span id="cb161-3"><a href="r的数据类型和相关计算.html#cb161-3" aria-hidden="true" tabindex="-1"></a>no_dup</span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE FALSE FALSE FALSE  TRUE</code></pre>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="r的数据类型和相关计算.html#cb163-1" aria-hidden="true" tabindex="-1"></a>names[no_dup]</span></code></pre></div>
+<pre><code>## [1] &quot;Xiaoming&quot; &quot;Ermao&quot;    &quot;Zhuzi&quot;</code></pre>
+<p><strong>获得两个向量的交集、并集和不同的元素</strong></p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="r的数据类型和相关计算.html#cb165-1" aria-hidden="true" tabindex="-1"></a>setA <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>)</span>
+<span id="cb165-2"><a href="r的数据类型和相关计算.html#cb165-2" aria-hidden="true" tabindex="-1"></a>setB <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;f&quot;</span>, <span class="st">&quot;g&quot;</span>)</span>
+<span id="cb165-3"><a href="r的数据类型和相关计算.html#cb165-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb165-4"><a href="r的数据类型和相关计算.html#cb165-4" aria-hidden="true" tabindex="-1"></a><span class="co">#两个向量的并集</span></span>
+<span id="cb165-5"><a href="r的数据类型和相关计算.html#cb165-5" aria-hidden="true" tabindex="-1"></a><span class="fu">union</span>(setA,setB)</span></code></pre></div>
+<pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot;</code></pre>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="r的数据类型和相关计算.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="co">#两个向量的交集</span></span>
+<span id="cb167-2"><a href="r的数据类型和相关计算.html#cb167-2" aria-hidden="true" tabindex="-1"></a><span class="fu">intersect</span>(setA,setB)</span></code></pre></div>
+<pre><code>## [1] &quot;d&quot; &quot;e&quot;</code></pre>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="r的数据类型和相关计算.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="co">#获得向量setA中所有不同于向量setB中的元素的元素</span></span>
+<span id="cb169-2"><a href="r的数据类型和相关计算.html#cb169-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setdiff</span>(setA,setB)</span></code></pre></div>
+<pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="r的数据类型和相关计算.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="co">#获得向量setB中所有不同于向量setA中的元素的元素</span></span>
+<span id="cb171-2"><a href="r的数据类型和相关计算.html#cb171-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setdiff</span>(setB,setA)</span></code></pre></div>
+<pre><code>## [1] &quot;f&quot; &quot;g&quot;</code></pre>
+<p><strong>其他函数</strong></p>
+<p>当然，还有很多可用于向量的函数。这里有一个表包含了很多向量函数。当您需要时，可以从这里查它们的功能。</p>
+<table>
+<caption><span id="tab:vecf">Table 2.1: </span> 向量函数</caption>
+<thead>
+<tr class="header">
+<th align="left">函数</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">max(x)</td>
+<td align="left">求向量x的最大值</td>
+</tr>
+<tr class="even">
+<td align="left">min(x)</td>
+<td align="left">求向量x的最小值</td>
+</tr>
+<tr class="odd">
+<td align="left">sum(x)</td>
+<td align="left">求向量x中的所有数值的和</td>
+</tr>
+<tr class="even">
+<td align="left">mean(x)</td>
+<td align="left">求向量x的平均值</td>
+</tr>
+<tr class="odd">
+<td align="left">median(x)</td>
+<td align="left">求向量x的中位数</td>
+</tr>
+<tr class="even">
+<td align="left">range(x)</td>
+<td align="left">返回向量的最小值和最大值</td>
+</tr>
+<tr class="odd">
+<td align="left">var(x)</td>
+<td align="left">求向量x的样本方差</td>
+</tr>
+<tr class="even">
+<td align="left">cor(x, y)</td>
+<td align="left">求向量x和y的相关系数</td>
+</tr>
+<tr class="odd">
+<td align="left">sort(x)</td>
+<td align="left">对向量x中的元素进行递增排序，并返回排序后的向量</td>
+</tr>
+<tr class="even">
+<td align="left">rev(sort(x))</td>
+<td align="left">对向量x中的元素进行递减排序，并返回排序后的向量</td>
+</tr>
+<tr class="odd">
+<td align="left">order(x)</td>
+<td align="left">先将向量x中的元素升序排列，得到向量x中每个元素的位置序号，然后返回一个向量包含向量x中的每个元素的位置序号</td>
+</tr>
+<tr class="even">
+<td align="left">rank(x)</td>
+<td align="left">计算向量的秩，并返回这个秩向量</td>
+</tr>
+<tr class="odd">
+<td align="left">quantile(x)</td>
+<td align="left">返回一个包含向量x的最小值, 25百分位数, 中位数,75百分位数, 和最大值的向量</td>
+</tr>
+<tr class="even">
+<td align="left">cumsum(x)</td>
+<td align="left">返回一个将向量x中元素按索引顺序累加的向量，例如向量x=(1,2,3),返回向量就是（1，3，6）</td>
+</tr>
+<tr class="odd">
+<td align="left">cumprod(x)</td>
+<td align="left">返回一个将向量x中元素按索引顺序累乘的向量，例如向量x=(1,2,3),返回向量就是（1，2，6）</td>
+</tr>
+<tr class="even">
+<td align="left">cummax(x)</td>
+<td align="left">返回一个向量，它包含到向量x中每个元素之前累积的最大值</td>
+</tr>
+<tr class="odd">
+<td align="left">cummin(x)</td>
+<td align="left">返回一个向量，它包含到向量x中每个元素之前累积的最小值</td>
+</tr>
+<tr class="even">
+<td align="left">pmax(x,y,z)</td>
+<td align="left">返回一个向量，其长度等于向量x、y、z中最长的那个向量的长度。它包含向量x、y、z的第i个位置上元素中最大的值</td>
+</tr>
+<tr class="odd">
+<td align="left">pmin(x,y,z)</td>
+<td align="left">返回一个向量，其长度等于向量x、y、z中最长的那个向量的长度。它包含向量x、y、z的第i个位置上元素中最小的值</td>
+</tr>
+<tr class="even">
+<td align="left">colMeans(x)</td>
+<td align="left">求dataframe x或矩阵x的每列的平均值</td>
+</tr>
+<tr class="odd">
+<td align="left">colSums(x)</td>
+<td align="left">求dataframe x或矩阵x的每列的总和</td>
+</tr>
+<tr class="even">
+<td align="left">rowMeans(x)</td>
+<td align="left">求dataframe x或矩阵x的每行的平均值</td>
+</tr>
+<tr class="odd">
+<td align="left">rowSums(x)</td>
+<td align="left">求dataframe x或矩阵x的每行的总和</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="数组与矩阵" class="section level2" number="2.6">
+<h2><span class="header-section-number">2.6</span> 数组与矩阵</h2>
+<div id="数组array" class="section level3" number="2.6.1">
+<h3><span class="header-section-number">2.6.1</span> 数组（array）</h3>
+<p><strong>创建数组</strong></p>
+<p>数组是一个多维的数据类型，由array()函数创建自一个向量，由该函数的参数dim来指定其维度。</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="r的数据类型和相关计算.html#cb173-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">24</span></span>
+<span id="cb173-2"><a href="r的数据类型和相关计算.html#cb173-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb173-3"><a href="r的数据类型和相关计算.html#cb173-3" aria-hidden="true" tabindex="-1"></a><span class="co">#创建一个维度为2 ×3 × 4的三维数组</span></span>
+<span id="cb173-4"><a href="r的数据类型和相关计算.html#cb173-4" aria-hidden="true" tabindex="-1"></a>arr <span class="ot">&lt;-</span> <span class="fu">array</span>(vec, <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>))</span>
+<span id="cb173-5"><a href="r的数据类型和相关计算.html#cb173-5" aria-hidden="true" tabindex="-1"></a>arr</span></code></pre></div>
+<pre><code>## , , 1
+## 
+##      [,1] [,2] [,3]
+## [1,]    1    3    5
+## [2,]    2    4    6
+## 
+## , , 2
+## 
+##      [,1] [,2] [,3]
+## [1,]    7    9   11
+## [2,]    8   10   12
+## 
+## , , 3
+## 
+##      [,1] [,2] [,3]
+## [1,]   13   15   17
+## [2,]   14   16   18
+## 
+## , , 4
+## 
+##      [,1] [,2] [,3]
+## [1,]   19   21   23
+## [2,]   20   22   24</code></pre>
+<p>以上代码返回了4个二维数组，因为数组的第3个维度是4。</p>
+<p>我们也可以用dim()函数来将上边的向量转化成三维数组。</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="r的数据类型和相关计算.html#cb175-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">24</span></span>
+<span id="cb175-2"><a href="r的数据类型和相关计算.html#cb175-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb175-3"><a href="r的数据类型和相关计算.html#cb175-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(vec) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>)</span>
+<span id="cb175-4"><a href="r的数据类型和相关计算.html#cb175-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb175-5"><a href="r的数据类型和相关计算.html#cb175-5" aria-hidden="true" tabindex="-1"></a>vec </span></code></pre></div>
+<pre><code>## , , 1
+## 
+##      [,1] [,2] [,3] [,4]
+## [1,]    1    3    5    7
+## [2,]    2    4    6    8
+## 
+## , , 2
+## 
+##      [,1] [,2] [,3] [,4]
+## [1,]    9   11   13   15
+## [2,]   10   12   14   16
+## 
+## , , 3
+## 
+##      [,1] [,2] [,3] [,4]
+## [1,]   17   19   21   23
+## [2,]   18   20   22   24</code></pre>
+<p><strong>你的任务：</strong></p>
+<p>仔细观察以上数组创建的过程，看看向量中的元素是如何一一地被放进数组中去的。</p>
+<p><strong>访问数组中的元素</strong></p>
+<p>访问/获取数组中的元素，可以用array加上[]实现，数组中各维度的元素的位置用逗号(,)隔开。</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="r的数据类型和相关计算.html#cb177-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">24</span></span>
+<span id="cb177-2"><a href="r的数据类型和相关计算.html#cb177-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb177-3"><a href="r的数据类型和相关计算.html#cb177-3" aria-hidden="true" tabindex="-1"></a><span class="co">#创建一个维度为2 ×3 × 4的三维数组</span></span>
+<span id="cb177-4"><a href="r的数据类型和相关计算.html#cb177-4" aria-hidden="true" tabindex="-1"></a>arr <span class="ot">&lt;-</span> <span class="fu">array</span>(vec, <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>))</span>
+<span id="cb177-5"><a href="r的数据类型和相关计算.html#cb177-5" aria-hidden="true" tabindex="-1"></a>arr</span></code></pre></div>
+<pre><code>## , , 1
+## 
+##      [,1] [,2] [,3]
+## [1,]    1    3    5
+## [2,]    2    4    6
+## 
+## , , 2
+## 
+##      [,1] [,2] [,3]
+## [1,]    7    9   11
+## [2,]    8   10   12
+## 
+## , , 3
+## 
+##      [,1] [,2] [,3]
+## [1,]   13   15   17
+## [2,]   14   16   18
+## 
+## , , 4
+## 
+##      [,1] [,2] [,3]
+## [1,]   19   21   23
+## [2,]   20   22   24</code></pre>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="r的数据类型和相关计算.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="co">#访问的元素在第1维的第1个位置，第2维的第2个位置，第3维的第3个位置。</span></span>
+<span id="cb179-2"><a href="r的数据类型和相关计算.html#cb179-2" aria-hidden="true" tabindex="-1"></a>arr[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span></code></pre></div>
+<pre><code>## [1] 15</code></pre>
+<p>从上面代码返回的结果，我们可以看到，访问三维数组中的元素，要先找到数组第3维的第3个二维数组，再根据前两个维度的位置找到该元素。</p>
+<p>另外，我们还可以访问三维数组中的二维数组和一维的行和列向量。</p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="r的数据类型和相关计算.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="co">#访问三维数组中第三维度的第二个二维数组</span></span>
+<span id="cb181-2"><a href="r的数据类型和相关计算.html#cb181-2" aria-hidden="true" tabindex="-1"></a>arr[,,<span class="dv">2</span>]</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    7    9   11
+## [2,]    8   10   12</code></pre>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="r的数据类型和相关计算.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="co">#访问上边的二维数组的每一行</span></span>
+<span id="cb183-2"><a href="r的数据类型和相关计算.html#cb183-2" aria-hidden="true" tabindex="-1"></a>arr[<span class="dv">1</span>,,<span class="dv">2</span>]</span></code></pre></div>
+<pre><code>## [1]  7  9 11</code></pre>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="r的数据类型和相关计算.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="co">#访问上边的二维数组的每一列</span></span>
+<span id="cb185-2"><a href="r的数据类型和相关计算.html#cb185-2" aria-hidden="true" tabindex="-1"></a>arr[,<span class="dv">1</span>,<span class="dv">2</span>]</span></code></pre></div>
+<pre><code>## [1] 7 8</code></pre>
+</div>
+<div id="矩阵matrix" class="section level3" number="2.6.2">
+<h3><span class="header-section-number">2.6.2</span> 矩阵(Matrix)</h3>
+<p>电影《黑客帝国》讲述了一个年轻的网络黑客发现现实世界是由一个名为“Matrix（矩阵）”的人工智能母体控制。人类都生活在这个母体虚拟出来的世界中，有点像现在很火的元宇宙。而电影《黑客帝国》的名字就叫做The Matrix。由此可见，矩阵对于计算机的重要性。</p>
+<p>在R中，矩阵就是一个二维的数组。函数is.matrix()可以判断一个数据类型的对象是否是矩阵。</p>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="r的数据类型和相关计算.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.matrix</span>(arr[,,<span class="dv">2</span>])</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>创建向量，像创建数组一样，也有两种方式。</p>
+<p><strong>用函数matrix()</strong></p>
+<p>函数matrix()通过byrow参数控制矩阵创建的方式（按列还是按行将向量中的元素放到矩阵中去），通过nrow或者ncol指定矩阵的维度。</p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="r的数据类型和相关计算.html#cb189-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span></span>
+<span id="cb189-2"><a href="r的数据类型和相关计算.html#cb189-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb189-3"><a href="r的数据类型和相关计算.html#cb189-3" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(vec, <span class="at">nrow =</span> <span class="dv">3</span>)</span>
+<span id="cb189-4"><a href="r的数据类型和相关计算.html#cb189-4" aria-hidden="true" tabindex="-1"></a>mat</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    4    7   10
+## [2,]    2    5    8   11
+## [3,]    3    6    9   12</code></pre>
+<p>由以上代码返回的结果可知，默认情况下，matrix()函数是按列的方式将向量中的元素一一放入到矩阵中的。nrow=3表示创建的矩阵是3行，那肯定就是4列了，因为我们有12个元素。</p>
+<p>如果将matrix()中的参数byrow设置为TRUE，它将一行一行地将向量中的元素放到矩阵中。仔细观察以下代码返回的结果。</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="r的数据类型和相关计算.html#cb191-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span></span>
+<span id="cb191-2"><a href="r的数据类型和相关计算.html#cb191-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb191-3"><a href="r的数据类型和相关计算.html#cb191-3" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(vec, <span class="at">byrow =</span> <span class="cn">TRUE</span>, <span class="at">nrow =</span> <span class="dv">3</span>)</span>
+<span id="cb191-4"><a href="r的数据类型和相关计算.html#cb191-4" aria-hidden="true" tabindex="-1"></a>mat</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    2    3    4
+## [2,]    5    6    7    8
+## [3,]    9   10   11   12</code></pre>
+<p>在实践中，可以根据自己的需要选择矩阵的创建方式。</p>
+<p><strong>用函数dim()</strong></p>
+<p>这是创建矩阵和创建数组一样的地方。这从另一个方面印证了矩阵是二维数组。</p>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="r的数据类型和相关计算.html#cb193-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span></span>
+<span id="cb193-2"><a href="r的数据类型和相关计算.html#cb193-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb193-3"><a href="r的数据类型和相关计算.html#cb193-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(vec) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb193-4"><a href="r的数据类型和相关计算.html#cb193-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb193-5"><a href="r的数据类型和相关计算.html#cb193-5" aria-hidden="true" tabindex="-1"></a>vec</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    4    7   10
+## [2,]    2    5    8   11
+## [3,]    3    6    9   12</code></pre>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="r的数据类型和相关计算.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="co">#vec既是矩阵也是一个二维数组</span></span>
+<span id="cb195-2"><a href="r的数据类型和相关计算.html#cb195-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.matrix</span>(vec)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="r的数据类型和相关计算.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.array</span>(vec)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p><strong>给矩阵的行和列命名</strong></p>
+<p>新创建的矩阵的行和列是没有名字的。函数colnames()返回矩阵的列名向量，函数rownames()返回矩阵的行名向量。</p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="r的数据类型和相关计算.html#cb199-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span></span>
+<span id="cb199-2"><a href="r的数据类型和相关计算.html#cb199-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb199-3"><a href="r的数据类型和相关计算.html#cb199-3" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(vec, <span class="at">byrow =</span> <span class="cn">TRUE</span>, <span class="at">nrow =</span> <span class="dv">3</span>)</span>
+<span id="cb199-4"><a href="r的数据类型和相关计算.html#cb199-4" aria-hidden="true" tabindex="-1"></a>mat</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    2    3    4
+## [2,]    5    6    7    8
+## [3,]    9   10   11   12</code></pre>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="r的数据类型和相关计算.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mat)</span></code></pre></div>
+<pre><code>## NULL</code></pre>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="r的数据类型和相关计算.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(mat)</span></code></pre></div>
+<pre><code>## NULL</code></pre>
+<p>因此，将一个名字向量赋值给colnames(mat)或者rownames(mat)，便可以给矩阵mat的列和行命名了。</p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="r的数据类型和相关计算.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;var1&quot;</span>, <span class="st">&quot;var2&quot;</span>, <span class="st">&quot;var3&quot;</span>, <span class="st">&quot;var4&quot;</span>)</span>
+<span id="cb205-2"><a href="r的数据类型和相关计算.html#cb205-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(mat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;participant1&quot;</span>, <span class="st">&quot;participant2&quot;</span>, <span class="st">&quot;participant3&quot;</span>)</span>
+<span id="cb205-3"><a href="r的数据类型和相关计算.html#cb205-3" aria-hidden="true" tabindex="-1"></a>mat</span></code></pre></div>
+<pre><code>##              var1 var2 var3 var4
+## participant1    1    2    3    4
+## participant2    5    6    7    8
+## participant3    9   10   11   12</code></pre>
+<p>或者</p>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="r的数据类型和相关计算.html#cb207-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">16</span></span>
+<span id="cb207-2"><a href="r的数据类型和相关计算.html#cb207-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb207-3"><a href="r的数据类型和相关计算.html#cb207-3" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(vec, <span class="at">byrow =</span> <span class="cn">TRUE</span>, <span class="at">nrow =</span> <span class="dv">4</span>)</span>
+<span id="cb207-4"><a href="r的数据类型和相关计算.html#cb207-4" aria-hidden="true" tabindex="-1"></a>mat</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    2    3    4
+## [2,]    5    6    7    8
+## [3,]    9   10   11   12
+## [4,]   13   14   15   16</code></pre>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="r的数据类型和相关计算.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mat) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(mat, <span class="at">do.NULL =</span> <span class="cn">FALSE</span>, <span class="at">prefix =</span> <span class="st">&quot;var&quot;</span>)</span>
+<span id="cb209-2"><a href="r的数据类型和相关计算.html#cb209-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(mat) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(mat, <span class="at">do.NULL =</span> <span class="cn">FALSE</span>, <span class="at">prefix =</span> <span class="st">&quot;participant&quot;</span>)</span>
+<span id="cb209-3"><a href="r的数据类型和相关计算.html#cb209-3" aria-hidden="true" tabindex="-1"></a>mat</span></code></pre></div>
+<pre><code>##              var1 var2 var3 var4
+## participant1    1    2    3    4
+## participant2    5    6    7    8
+## participant3    9   10   11   12
+## participant4   13   14   15   16</code></pre>
+<p>或者</p>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="r的数据类型和相关计算.html#cb211-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">24</span></span>
+<span id="cb211-2"><a href="r的数据类型和相关计算.html#cb211-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb211-3"><a href="r的数据类型和相关计算.html#cb211-3" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(vec, <span class="at">byrow =</span> <span class="cn">TRUE</span>, <span class="at">nrow =</span> <span class="dv">6</span>)</span>
+<span id="cb211-4"><a href="r的数据类型和相关计算.html#cb211-4" aria-hidden="true" tabindex="-1"></a>mat</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    2    3    4
+## [2,]    5    6    7    8
+## [3,]    9   10   11   12
+## [4,]   13   14   15   16
+## [5,]   17   18   19   20
+## [6,]   21   22   23   24</code></pre>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="r的数据类型和相关计算.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(mat) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">paste</span>(<span class="st">&quot;participant&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="fu">paste</span>(<span class="st">&quot;var&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span>
+<span id="cb213-2"><a href="r的数据类型和相关计算.html#cb213-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb213-3"><a href="r的数据类型和相关计算.html#cb213-3" aria-hidden="true" tabindex="-1"></a>mat</span></code></pre></div>
+<pre><code>##              var1 var2 var3 var4
+## participant1    1    2    3    4
+## participant2    5    6    7    8
+## participant3    9   10   11   12
+## participant4   13   14   15   16
+## participant5   17   18   19   20
+## participant6   21   22   23   24</code></pre>
+<p>这里用到了列表（list）和函数paste()。有兴趣的话，您可以单独试用一下paste()函数。</p>
+</div>
+<div id="矩阵运算" class="section level3" number="2.6.3">
+<h3><span class="header-section-number">2.6.3</span> 矩阵运算</h3>
+<p>使用R进行统计分析时，数据通常以数据框（data frame）的形式保存。矩阵运算的方法也可以用于数据框中的数据的运算。</p>
+<p><strong>矩阵加法</strong></p>
+<p><span class="math inline">\(A\)</span>和<span class="math inline">\(B\)</span>两个矩阵相加，它们必须有相同的维度，否则R会报错。</p>
+<p>结果矩阵<span class="math inline">\(C\)</span>中的元素<span class="math inline">\(C_{ij}\)</span>是<span class="math inline">\(A_{ij}\)</span>和<span class="math inline">\(B_{ij}\)</span>的和。</p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="r的数据类型和相关计算.html#cb215-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>), <span class="at">byrow =</span> T, <span class="at">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb215-2"><a href="r的数据类型和相关计算.html#cb215-2" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6</code></pre>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="r的数据类型和相关计算.html#cb217-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>), <span class="at">byrow =</span> T, <span class="at">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb217-2"><a href="r的数据类型和相关计算.html#cb217-2" aria-hidden="true" tabindex="-1"></a>B</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    6    5    4
+## [2,]    3    2    1</code></pre>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="r的数据类型和相关计算.html#cb219-1" aria-hidden="true" tabindex="-1"></a>(C <span class="ot">&lt;-</span> A <span class="sc">+</span> B)</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    7    7    7
+## [2,]    7    7    7</code></pre>
+<p>注：在R的赋值语句放到括号中，赋值后的结果会打印出来。</p>
+<p><strong>数值和矩阵的乘法</strong></p>
+<p>一个数值<span class="math inline">\(x\)</span>乘以矩阵<span class="math inline">\(A\)</span>的结果是<span class="math inline">\(x\)</span>乘以<span class="math inline">\(A\)</span>中的每一个元素。</p>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="r的数据类型和相关计算.html#cb221-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb221-2"><a href="r的数据类型和相关计算.html#cb221-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb221-3"><a href="r的数据类型和相关计算.html#cb221-3" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>), <span class="at">byrow =</span> T, <span class="at">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb221-4"><a href="r的数据类型和相关计算.html#cb221-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb221-5"><a href="r的数据类型和相关计算.html#cb221-5" aria-hidden="true" tabindex="-1"></a>(C <span class="ot">&lt;-</span> x<span class="sc">*</span>A)</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]  0.1  0.2  0.3
+## [2,]  0.4  0.5  0.6</code></pre>
+<p><strong>矩阵乘法</strong></p>
+<p>矩阵<span class="math inline">\(A\)</span>乘以矩阵<span class="math inline">\(B\)</span>时：</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(A\)</span>的列数必须和<span class="math inline">\(B\)</span>的行数相同。</li>
+<li>矩阵相乘和数值相乘不同，要用<span class="math inline">\(\%*\%\)</span>。</li>
+<li>一般情况下，<span class="math inline">\(A\ \%*\%\ B\ \neq\ B\ \%*\%\ A\)</span>。</li>
+</ol>
+<p>结果矩阵<span class="math inline">\(C\)</span>：</p>
+<ol style="list-style-type: decimal">
+<li>行数与矩阵<span class="math inline">\(A\)</span>的行数相同，列数与矩阵<span class="math inline">\(B\)</span>列数相同。</li>
+<li>矩阵<span class="math inline">\(C\)</span>的第<span class="math inline">\(i\)</span>行第<span class="math inline">\(j\)</span>列的元素<span class="math inline">\(C_{ij}\)</span>由矩阵<span class="math inline">\(A\)</span>中第<span class="math inline">\(i\)</span>行的元素和矩阵<span class="math inline">\(B\)</span>中第<span class="math inline">\(j\)</span>列的元素对应相乘，再将乘积相加所得。</li>
+</ol>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="r的数据类型和相关计算.html#cb223-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>), <span class="at">byrow =</span> T, <span class="at">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb223-2"><a href="r的数据类型和相关计算.html#cb223-2" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6</code></pre>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="r的数据类型和相关计算.html#cb225-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>), <span class="at">byrow =</span> T, <span class="at">nrow =</span> <span class="dv">3</span>)</span>
+<span id="cb225-2"><a href="r的数据类型和相关计算.html#cb225-2" aria-hidden="true" tabindex="-1"></a>B</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    6    5
+## [2,]    4    3
+## [3,]    2    1</code></pre>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="r的数据类型和相关计算.html#cb227-1" aria-hidden="true" tabindex="-1"></a>(C <span class="ot">&lt;-</span> A<span class="sc">%*%</span>B)</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]   20   14
+## [2,]   56   41</code></pre>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="r的数据类型和相关计算.html#cb229-1" aria-hidden="true" tabindex="-1"></a>(D <span class="ot">&lt;-</span> B<span class="sc">%*%</span>A)</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]   26   37   48
+## [2,]   16   23   30
+## [3,]    6    9   12</code></pre>
+<p><strong>矩阵的转置</strong></p>
+<p>矩阵的转置是将原矩阵的行变成列得到的新矩阵，它在统计分析中是个很常用的技术。</p>
+<p>在R中，矩阵的转置用函数t()。</p>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="r的数据类型和相关计算.html#cb231-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>), <span class="at">byrow =</span> T, <span class="at">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb231-2"><a href="r的数据类型和相关计算.html#cb231-2" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6</code></pre>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="r的数据类型和相关计算.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="co">#A的转置</span></span>
+<span id="cb233-2"><a href="r的数据类型和相关计算.html#cb233-2" aria-hidden="true" tabindex="-1"></a>(C <span class="ot">&lt;-</span> <span class="fu">t</span>(A))</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    4
+## [2,]    2    5
+## [3,]    3    6</code></pre>
+<p><strong>行列式运算</strong></p>
+<p>由方阵<span class="math inline">\(A\)</span>构成的行列式为<span class="math inline">\(|A|\)</span>。</p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="r的数据类型和相关计算.html#cb235-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">3</span>,<span class="dv">3</span>), <span class="at">byrow =</span> T, <span class="at">nrow =</span> <span class="dv">3</span>)</span>
+<span id="cb235-2"><a href="r的数据类型和相关计算.html#cb235-2" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    5    2    1
+## [2,]    4    3    8
+## [3,]    7    3    3</code></pre>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="r的数据类型和相关计算.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="fu">det</span>(A)</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+</div>
+<div id="矩阵函数" class="section level3" number="2.6.4">
+<h3><span class="header-section-number">2.6.4</span> 矩阵函数</h3>
+<p>矩阵的相关的函数多是用于对矩阵中的行或列的计算。</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="literature.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-rbasic.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
